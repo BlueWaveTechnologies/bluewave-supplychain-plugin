@@ -91,8 +91,50 @@ bluewave.charts.SupplyChainEditor = function(parent, config) {
   //**************************************************************************
   //** update
   //**************************************************************************
-    this.update = function(sankeyConfig){
-        sankeyEditor.update(sankeyConfig);
+    this.update = function(node){
+        
+        var inputs = [];
+        for (var key in node.inputs) {
+            if (node.inputs.hasOwnProperty(key)){
+                var inputNode = node.inputs[key];
+                if (inputNode.type==="supplyChain"){
+                    var inputConfig = inputNode.config;
+                    if (inputConfig) inputs.push(inputConfig);
+                }
+            }
+        }
+        
+        
+      //Generate data to mimic what we need to generate a sankey using drawflow 
+        if (inputs.length>0){
+            var nodes = {};
+            var quantities = {};
+            
+            var input = inputs[0];
+            for (var nodeID in input.nodes) {
+                if (input.nodes.hasOwnProperty(nodeID)){
+                    var node = input.nodes[nodeID];
+                    node.inputs = {};
+                    nodes[nodeID] = node;
+                }
+            }
+            for (var linkID in input.links) {
+                if (input.links.hasOwnProperty(linkID)){
+                    var link = input.links[linkID];
+                    quantities[linkID] = link.quantity;
+
+                    var arr = linkID.split("->");
+                    var sourceID = arr[0];
+                    var targetID = arr[1];
+                    nodes[targetID].inputs[sourceID] = {};
+                }
+            }
+            
+            node.config.nodes = nodes;
+            node.config.quantities = quantities;
+        }
+        
+        sankeyEditor.update(node);
     };
 
 
@@ -117,6 +159,17 @@ bluewave.charts.SupplyChainEditor = function(parent, config) {
   //**************************************************************************
     this.getChart = function(){
         return sankeyEditor.getEditor();
+    };
+
+
+  //**************************************************************************
+  //** renderChart
+  //**************************************************************************
+  /** Used to render a sankey chart in a given dom element using the current
+   *  chart config and data
+   */
+    this.renderChart = function(parent){
+        return sankeyEditor.renderChart(parent);
     };
 
 
