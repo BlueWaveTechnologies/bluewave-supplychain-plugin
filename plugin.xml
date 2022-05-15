@@ -4,18 +4,23 @@
   <webapp>
 
     <includes>
-      <script src="web/app/charts/SupplyChainEditor.js" type="text/javascript"></script>
+      <script src="web/app/charts/SupplyChainEditor.js" type="text/javascript"/>
     </includes>
 
     <extensions>
         <explorer>
           <node
+            title="Supply Chain"
+            type="supplyChain"
+            icon="fas fa-link"
+          >
+            <editor
               class="bluewave.charts.SupplyChainEditor"
-              title="Edit Supply Chain"
               width="1680"
               height="920"
               resizable="true"
-          />
+            />
+          </node>
         </explorer>
     </extensions>
 
@@ -23,7 +28,7 @@
 
 
   <webservices>
-    <service endpoint="SupplyChain" class="bluewave.web.services.SupplyChainService"></service>
+    <service endpoint="SupplyChain" class="bluewave.web.services.SupplyChainService"/>
   </webservices>
 
 </plugin>
