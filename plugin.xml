@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin name="SupplyChain">
 
-  <includes>
-    <script src="locomotive/SupplyChainEditor.js" type="text/javascript"></script>
-  </includes>
+  <webapp>
 
+    <includes>
+      <script src="web/app/charts/SupplyChainEditor.js" type="text/javascript"></script>
+    </includes>
 
-  <webservices>
-    <service endpoint="SupplyChain" class="bluewave.web.services.SupplyChainService"></service>
-  </webservices>
-
-  <extensions>
-      <explorer>
-          <editor
+    <extensions>
+        <explorer>
+          <node
               class="bluewave.charts.SupplyChainEditor"
               title="Edit Supply Chain"
               width="1680"
               height="920"
               resizable="true"
           />
-      </explorer>
-  </extensions>
+        </explorer>
+    </extensions>
+
+  </webapp>
+
+
+  <webservices>
+    <service endpoint="SupplyChain" class="bluewave.web.services.SupplyChainService"></service>
+  </webservices>
 
 </plugin>
