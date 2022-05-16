@@ -8,7 +8,7 @@
     </includes>
 
     <extensions>
-        <explorer>
+        <explorer type="editor">
           <node
             title="Supply Chain"
             type="supplyChain"
