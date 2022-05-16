@@ -89,8 +89,8 @@
                     </archive>
                 </configuration>
             </plugin>
-            
-            
+
+
             <!-- Create distribution folder (dist) -->
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -102,20 +102,24 @@
                   <configuration>
                     <target>
                         
-                      <!-- Move jars from /target to /dist -->
+                      <!-- Move jar from /target to /dist -->
                       <move file="${project.build.directory}/${project.artifactId}-${project.version}.jar" todir="${project.basedir}/dist" />
+
+
+                      <!-- Move lib from /target to /dist
                       <move todir="${project.basedir}/dist/lib" >
                           <fileset dir="${project.build.directory}/lib" />
                       </move>
-                      
+                      -->
+
                       <!-- Copy plugin.xml to /dist -->
                       <copy file="${project.basedir}/plugin.xml" todir="${project.basedir}/dist" />
-                      
+
                       <!-- Copy /web to /dist -->
                       <copy todir="${project.basedir}/dist/web" >
                           <fileset dir="${project.basedir}/web" />
                       </copy>
-                      
+
                     </target>
                   </configuration>
                   <goals>
@@ -124,7 +128,7 @@
                 </execution>
               </executions>
             </plugin>
-            
+
 
       </plugins>
     </build>
